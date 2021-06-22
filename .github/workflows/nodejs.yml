@@ -18,4 +18,4 @@ jobs:
       env:
         CI: true
         DATABASE_URL: postgres://alchemy:alchemy@postgres:5432/alchemy
-        MONGO_DB_URL: ${{ secrets.MONGO_DB_URI }}
+        MONGO_DB_URI: ${{ secrets.MONGO_DB_URI }}
