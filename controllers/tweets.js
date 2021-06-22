@@ -12,4 +12,13 @@ export default Router()
     catch(err){
       next(err);
     }
+  })
+  .get('/', async (req, res, next) => {
+    try{
+      const tweets = await tweetService.getAll();
+      res.send(tweets);
+    }
+    catch(err){
+      next(err);
+    }
   });
