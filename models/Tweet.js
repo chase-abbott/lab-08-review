@@ -9,8 +9,13 @@ const tweetSchema = new Schema({
   user: {
     type: String,
     required: true
+  },
+  tweetId: {
+    type: String,
+    required: true
   }
 }, { timestamps: true });
+
 
 const Tweet = mongoose.model('Tweet', tweetSchema);
 

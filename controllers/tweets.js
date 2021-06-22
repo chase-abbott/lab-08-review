@@ -4,9 +4,9 @@ import tweetService from '../services/TweetService.js';
 
 
 export default Router()
-  .post('/', async (req, res, next) => {
+  .post('/:id', async (req, res, next) => {
     try{
-      const tweet = await tweetService.insert(req.body);
+      const tweet = await tweetService.insert(req.params.id);
       res.send(tweet);
     }
     catch(err){
@@ -33,7 +33,7 @@ export default Router()
   })
   .delete('/:id', async (req, res, next) => {
     try{
-      const tweet = await tweetService.deleteById(req.params.id, res);
+      const tweet = await tweetService.deleteById(req.params.id);
       res.send(tweet);
     }
     catch(err){
