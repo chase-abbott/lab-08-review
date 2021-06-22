@@ -48,7 +48,6 @@ describe('demo routes', () => {
       .send(tweetTwo);
 
     const res = await request(app).get('/api/v1/tweets');
-    console.log(res.body);
   
     expect(res.body).toEqual([{
       _id: expect.any(String),
@@ -67,4 +66,31 @@ describe('demo routes', () => {
       __v: 0
     }]);
   });
+
+  it('updates a tweet in the database', async () => {
+
+    const tweetOne = {
+      tweet: 'lets get it',
+      user: 'chase'
+    };
+
+    const postres = await request(app)
+      .post('/api/v1/tweets')
+      .send(tweetOne);
+
+    const updateres = await request(app)
+      .put(`/api/v1/tweets/${postres.body._id}`)
+      .send({ tweet: 'wait up!' });
+
+    expect(updateres.body).toEqual({
+      _id: expect.any(String),
+      tweet: 'wait up!',
+      user: 'chase',
+      createdAt: expect.any(String),
+      updatedAt: expect.any(String),
+      __v: 0
+    });
+  });
+
+
 });

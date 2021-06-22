@@ -17,7 +17,11 @@ export default class TweetService {
       .then(results => {
         return results;
       });
+  }
 
+  static async updateById(id, body){
+    return Tweet.findByIdAndUpdate(id, body, () => {})
+      .then(results => (results));
   }
 
 }

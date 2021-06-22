@@ -21,4 +21,13 @@ export default Router()
     catch(err){
       next(err);
     }
+  })
+  .put('/:id', async (req, res, next) => {
+    try{
+      const tweet = await tweetService.updateById(req.params.id, req.body);
+      res.send(tweet);
+    }
+    catch(err){
+      next(err);
+    }
   });
