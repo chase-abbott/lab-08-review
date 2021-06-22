@@ -1,18 +1,32 @@
-name: Node.js CI
+name: Run tests
 
 on: [push]
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.x, 14.x]
+        mongodb-version: ['4.0', '4.2', '4.4']
+
     steps:
-    - uses: actions/checkout@v2
+    - name: Git checkout
+      uses: actions/checkout@v2
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
       with:
-        fetch-depth: 2
-    - uses: actions/setup-node@v1
+        node-version: ${{ matrix.node-version }}
+
+    - name: Start MongoDB
+      uses: supercharge/mongodb-github-action@1.6.0
       with:
-        node-version: '14.x'
-    - run: npm ci
+        mongodb-version: ${{ matrix.mongodb-version }}
+
+    - run: npm install
+
     - run: npm test
       env:
         CI: true
+
