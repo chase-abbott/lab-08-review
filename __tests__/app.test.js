@@ -92,5 +92,25 @@ describe('demo routes', () => {
     });
   });
 
+  it('deletes a tweet in the database', async () => {
+    const tweetOne = {
+      tweet: 'lets get it',
+      user: 'chase'
+    };
+
+    const postres = await request(app)
+      .post('/api/v1/tweets')
+      .send(tweetOne);
+
+    return request(app)
+      .delete(`/api/v1/tweets/${postres.body._id}`)
+      .then((res) => {
+        expect(res.body).toEqual(postres.body);
+      })
+      .then(() => request(app).get('/api/v1/tweets'))
+      .then(res => {
+        expect(res.body).toEqual([]);
+      });
+  });
 
 });

@@ -30,4 +30,13 @@ export default Router()
     catch(err){
       next(err);
     }
+  })
+  .delete('/:id', async (req, res, next) => {
+    try{
+      const tweet = await tweetService.deleteById(req.params.id);
+      res.send(tweet);
+    }
+    catch(err){
+      next(err);
+    }
   });

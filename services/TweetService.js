@@ -6,22 +6,22 @@ export default class TweetService {
     return Tweet.create({
       tweet: body.tweet,
       user: body.user
-    })
-      .then(results => {
-        return results;
-      });
-
+    });
   }
+
   static async getAll(){
-    return Tweet.find({})
-      .then(results => {
-        return results;
-      });
+    return Tweet.find({});
   }
 
   static async updateById(id, body){
-    return Tweet.findByIdAndUpdate(id, body, () => {})
-      .then(results => (results));
+    return Tweet.findByIdAndUpdate(id, body, () => {});
   }
+
+  static async deleteById(id){
+    let item;
+    await Tweet.findByIdAndRemove(id, (error, deletedItem) => item = deletedItem);
+    return item;
+  }
+
 
 }
