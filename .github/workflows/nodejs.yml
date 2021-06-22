@@ -29,4 +29,4 @@ jobs:
     - run: npm test
       env:
         CI: true
-
+        MONGO_DB_URI: ${{ secrets.MONGO_DB_URI }}
