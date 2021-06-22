@@ -33,7 +33,7 @@ export default Router()
   })
   .delete('/:id', async (req, res, next) => {
     try{
-      const tweet = await tweetService.deleteById(req.params.id);
+      const tweet = await tweetService.deleteById(req.params.id, res);
       res.send(tweet);
     }
     catch(err){

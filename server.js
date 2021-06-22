@@ -1,11 +1,16 @@
 import app from './lib/app.js';
+import mongo from './connection.js';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const PORT = process.env.PORT || 7892;
 
-app.listen(PORT, () => {
-  // eslint-disable-next-line no-console
-  console.log(`Started on ${PORT}`);
+mongo().then(() => {
+  app.listen(PORT, () => {
+    console.log(`Started on ${PORT}`);
+  });
 });
+
 
 process.on('exit', () => {
   console.log('Goodbye!');
