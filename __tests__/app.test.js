@@ -2,6 +2,7 @@ import request from 'supertest';
 import app from '../lib/app.js';
 
 describe('demo routes', () => {
+  
   it('puts a new tweet in the database', async () => {
     const tweet = {
       tweet: 'lets get it',
@@ -20,7 +21,7 @@ describe('demo routes', () => {
           updatedAt: expect.any(String),
           __v: 0
         });
-      })
-      .catch(err => console.log(err));
+      });
+    
   });
 });
