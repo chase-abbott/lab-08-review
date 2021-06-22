@@ -12,5 +12,12 @@ export default class TweetService {
       });
 
   }
+  static async getAll(){
+    return Tweet.find({})
+      .then(results => {
+        return results;
+      });
+
+  }
 
 }

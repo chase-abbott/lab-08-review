@@ -1,7 +1,11 @@
 import request from 'supertest';
 import app from '../lib/app.js';
+import Tweet from '../models/Tweet.js';
 
 describe('demo routes', () => {
+  beforeEach(() => {
+    return Tweet.deleteMany({ user: 'chase' });
+  });
   
   it('puts a new tweet in the database', async () => {
     const tweet = {
